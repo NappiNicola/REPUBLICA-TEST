@@ -17,6 +17,7 @@ public class PageObject {
 	private static JavascriptExecutor js = (JavascriptExecutor) driver;
 	private static WebDriverWait wait;
 	private static Duration timeout = Duration.ofSeconds(10);
+	private static Actions actions;
 	
 	public static void openConnection() {
 		
@@ -32,6 +33,10 @@ public class PageObject {
 		driver.quit();
 	}
 
+	public static void scrollTo(WebElement element) {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+	
 	public static void acceptCoockie() {
 		
 		wait = new WebDriverWait(driver, timeout);
@@ -111,7 +116,7 @@ public class PageObject {
 		driver.findElement(By.cssSelector("#rep-nav-list > ul > li:nth-child(3) > ul")).findElements(By.tagName("li")).forEach(x -> {System.out.println(x.getText());});
 		
 		Thread.sleep(1000);
-		Actions actions = new Actions(driver);
+		actions = new Actions(driver);
 		actions.moveToElement(driver.findElement(By.cssSelector("#rep-nav-list > ul > li:nth-child(5) > p")));
 		actions.perform();
 		System.out.println("\n" + driver.findElement(By.cssSelector("#rep-nav-list > ul > li:nth-child(4) > p")).getText() + "\n");
@@ -143,6 +148,30 @@ public class PageObject {
 		driver.manage().timeouts().implicitlyWait(timeout);
 		searchBar.sendKeys(Keys.ENTER);
 		
+		driver.findElement(By.cssSelector("#lista-risultati > article:nth-child(1) > h1 > a")).sendKeys(Keys.ENTER);
+		
+		
+	}
+	
+	public static void goToHomePage() {
+		
+		wait = new WebDriverWait(driver, timeout);
+		
+		wait.until(ExpectedConditions.elementToBeClickable(By.
+				cssSelector("#gatsby-focus-wrapper > div > main > div > div.limio-header > div > nav > a"))).click();
+		
+	}
+	
+	public static void highlight() throws InterruptedException {
+		
+		scrollTo(driver.findElement(By.cssSelector("#home > main > div:nth-child(2) > div.gd-column-8 > section:nth-child(1) > div > div > article > div")));
+		
+		Thread.sleep(2000);
+		
+		System.out.println("\n" +
+				driver.findElement(By.cssSelector(""
+						+ "#home > main > div:nth-child(2) > div.gd-column-8 > section:nth-child(1) > div > div > article > div")).getText()
+				);
 		
 	}
 
