@@ -1,10 +1,8 @@
 package it.republica.REPUBLICA_TEST;
 
 import java.io.IOException;
-
 import org.apache.http.client.ClientProtocolException;
 import org.json.simple.parser.ParseException;
-
 import api.APICaller;
 import it.republica.getpageobject.PageObject;
 
