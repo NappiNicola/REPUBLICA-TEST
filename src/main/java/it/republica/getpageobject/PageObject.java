@@ -33,7 +33,7 @@ public class PageObject {
 		driver.quit();
 	}
 
-	public static void scrollTo(WebElement element) {
+	private static void scrollTo(WebElement element) {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 	
@@ -72,7 +72,7 @@ public class PageObject {
 
 	}
 	
-	public static void scrollToClass_and_Tag(String className, String tagName) {
+	private static void scrollToClass_and_Tag(String className, String tagName) {
 		
 		String target = tagName + "." + className;
 		
